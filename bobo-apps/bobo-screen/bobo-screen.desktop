@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=BoboScreen
+Comment=Capturi de ecran si inregistrare video
+Exec=bobo-screen
+Icon=bobo-screen
+Terminal=false
+Type=Application
+Categories=BOBO;Graphics;Utility;
+StartupNotify=true
+StartupWMClass=bobo-screen

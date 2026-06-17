@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=BoboReader
+Comment=Vizualizator PDF, EPUB si benzi desenate
+Exec=bobo-reader %F
+Icon=bobo-reader
+Terminal=false
+Type=Application
+Categories=BOBO;Office;Viewer;
+MimeType=application/pdf;application/epub+zip;application/x-cbz;application/vnd.comicbook+zip;
+StartupNotify=true
+StartupWMClass=bobo-reader

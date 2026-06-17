@@ -1,0 +1,3 @@
+#!/bin/bash
+# Launcher BoboReader - APP 05 BOBO OS
+exec python3 /usr/share/bobo-reader/reader.py "$@"

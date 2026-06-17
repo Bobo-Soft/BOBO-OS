@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+# Called by runit when display-manager exits (crash or stop)
+# $1 = exit code of run script, $2 = signal
+EXIT_CODE="$1"
+
+if [ "${EXIT_CODE}" -ne 0 ] && [ "${EXIT_CODE}" -ne 256 ]; then
+  # Log crash and wait 2s before runit restarts the service
+  logger -t bobo-display-manager "Wayfire exited with code ${EXIT_CODE} — restarting..."
+  sleep 2
+fi

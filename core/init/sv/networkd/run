@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+# runit service: networkd
+# Manages network interfaces via systemd-networkd or iwd+dhcpcd.
+# Brings up Ethernet automatically; WiFi is managed by iwd.
+exec 2>&1
+exec /usr/lib/systemd/systemd-networkd

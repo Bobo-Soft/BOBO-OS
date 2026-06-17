@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=BoboPlayer
+Comment=Player video si audio pentru BOBO OS
+Exec=bobo-player %F
+Icon=bobo-player
+Terminal=false
+Type=Application
+Categories=BOBO;AudioVideo;Player;
+MimeType=video/mp4;video/x-matroska;video/x-msvideo;video/webm;video/quicktime;video/x-flv;audio/mpeg;audio/flac;audio/ogg;audio/x-wav;audio/aac;audio/opus;
+StartupNotify=true
+StartupWMClass=bobo-player

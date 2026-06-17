@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+# runit service: novalayer
+# NovaLayer daemon — routes file-open events to correct runtime
+# (Wine for .exe, Darling for .app, Waydroid for .apk, etc.)
+# Requires: D-Bus session running, Wayland session up.
+exec 2>&1
+# Wait for D-Bus system bus to be available
+until [ -S /run/dbus/system_bus_socket ]; do sleep 0.5; done
+exec /usr/bin/python3 /usr/local/lib/bobo/novalayer/novalayer-daemon.py

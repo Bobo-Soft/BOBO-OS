@@ -1,0 +1,3 @@
+#!/bin/bash
+# Launcher BoboUsers - APP 15 BOBO OS
+exec python3 /usr/share/bobo-users/users.py "$@"

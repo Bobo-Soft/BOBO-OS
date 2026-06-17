@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=BoboAI Local
+Comment=Asistent AI local cu Ollama
+Exec=bobo-ai-local
+Icon=bobo-ai-local
+Terminal=false
+Type=Application
+Categories=BOBO;Utility;Science;
+StartupNotify=true
+StartupWMClass=bobo-ai-local

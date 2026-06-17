@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=BoboNotif Daemon
+Comment=Server de notificari org.freedesktop.Notifications
+Exec=bobo-notif --daemon
+Icon=bobo-notif
+Terminal=false
+Type=Application
+Categories=BOBO;System;
+X-GNOME-Autostart-enabled=true
+NoDisplay=true

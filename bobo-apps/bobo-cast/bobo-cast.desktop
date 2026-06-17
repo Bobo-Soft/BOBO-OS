@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=BoboCast
+Comment=Transmite ecranul pe TV (Chromecast/DLNA)
+Exec=bobo-cast
+Icon=bobo-cast
+Terminal=false
+Type=Application
+Categories=BOBO;AudioVideo;Network;
+StartupNotify=true
+StartupWMClass=bobo-cast

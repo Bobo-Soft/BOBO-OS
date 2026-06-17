@@ -1,0 +1,70 @@
+# ============================================================================
+# BOBO OS .gitignore
+# Excludes: large build binaries, SEPARATE products, secrets, caches.
+# ============================================================================
+
+# --- Large build artifacts (ISO, squashfs, rootfs, kernel images) ----------
+build-output/
+*.iso
+*.iso.*
+*.squashfs
+*.img
+vmlinuz*
+initrd*
+*.qcow2
+linux-6.6*/
+boot/kernel/vmlinuz*
+
+# --- SEPARATE PRODUCTS (NOT part of BOBO OS — keep in their own repos) ------
+bobo-ai/
+bobostudio/
+BoboStudio/
+terra-antiqua/
+
+# --- Secrets / credentials (never commit) -----------------------------------
+*.env
+.env
+.env.*
+*.key
+*.pem
+*.pfx
+*.token
+id_rsa
+id_ed25519
+**/bridge.yaml
+**/.bridge_key
+*credentials*
+.npmrc
+
+# --- Local agent / editor state ---------------------------------------------
+.claude/
+.vscode/
+*.code-workspace
+
+# --- Python / Node caches ---------------------------------------------------
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+node_modules/
+.npm/
+.build/
+DerivedData/
+dist/
+*.egg-info/
+
+# --- Build logs, screenshots, scratch helpers -------------------------------
+docs/*.log
+docs/compile-log.txt
+docs/*-log.txt
+docs/build-env-log.txt
+docs/vbox-*.png
+docs/_*.sh
+scripts/windows/_*.sh
+
+# --- OS files ---------------------------------------------------------------
+.DS_Store
+Thumbs.db
+*.tmp
+*.swp

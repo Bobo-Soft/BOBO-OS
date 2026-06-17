@@ -1,0 +1,3 @@
+#!/bin/bash
+# Launcher BoboScreen - APP 20 BOBO OS
+exec python3 /usr/share/bobo-screen/screen.py "$@"

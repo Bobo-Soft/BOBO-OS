@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <rect width="128" height="128" rx="24" fill="#1a1a2e"/>
+  <text x="20" y="78" font-family="monospace" font-size="44" font-weight="bold" fill="#4a9eff">&lt;/&gt;</text>
+  <circle cx="98" cy="30" r="11" fill="#4a9eff" opacity="0.85"/>
+  <rect x="96" y="12" width="4" height="10" rx="2" fill="#4a9eff"/>
+  <text x="14" y="112" font-family="Inter,sans-serif" font-size="15" fill="#4a9eff" opacity="0.9">BoboXcode</text>
+</svg>

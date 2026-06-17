@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=BoboDev
+Comment=Manager de containere Podman
+Exec=bobo-dev
+Icon=bobo-dev
+Terminal=false
+Type=Application
+Categories=BOBO;Development;System;
+StartupNotify=true
+StartupWMClass=bobo-dev

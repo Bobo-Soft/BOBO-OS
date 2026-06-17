@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Instaleaza BOBO OS
+Comment=Instaleaza BOBO OS pe disc
+Exec=bobo-installer
+Icon=bobo-installer
+Terminal=false
+Type=Application
+Categories=BOBO;System;
+StartupNotify=true
+StartupWMClass=bobo-installer

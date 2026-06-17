@@ -1,0 +1,3 @@
+#!/bin/bash
+# Launcher BoboRemote - APP 24 BOBO OS
+exec python3 /usr/share/bobo-remote/remote.py "$@"

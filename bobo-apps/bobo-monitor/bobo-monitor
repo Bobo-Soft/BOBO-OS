@@ -1,0 +1,3 @@
+#!/bin/bash
+# Launcher BoboMonitor - APP 02 BOBO OS
+exec python3 /usr/share/bobo-monitor/monitor.py "$@"

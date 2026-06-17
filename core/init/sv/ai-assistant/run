@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+# runit service: ai-assistant
+# Background daemon for the integrated AI assistant (Win+A).
+# Connects to local Ollama or cloud API based on config.
+exec 2>&1
+until [ -S /run/dbus/system_bus_socket ]; do sleep 0.5; done
+export XDG_RUNTIME_DIR=/run/user/1000
+exec chpst -u bobo \
+  env XDG_RUNTIME_DIR=/run/user/1000 \
+  /usr/bin/python3 /usr/local/lib/bobo/ai-assistant/assistant-daemon.py

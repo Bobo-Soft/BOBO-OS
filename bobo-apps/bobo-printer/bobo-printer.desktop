@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=BoboPrinter
+Comment=Gestionare imprimante si cozi de tiparire
+Exec=bobo-printer
+Icon=bobo-printer
+Terminal=false
+Type=Application
+Categories=BOBO;System;HardwareSettings;
+StartupNotify=true
+StartupWMClass=bobo-printer

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=BoboUpdate
+Comment=Actualizari de sistem cu snapshot si rollback
+Exec=bobo-update
+Icon=bobo-update
+Terminal=false
+Type=Application
+Categories=BOBO;System;PackageManager;
+StartupNotify=true
+StartupWMClass=bobo-update

@@ -1,0 +1,25 @@
+/* BoboPlayer - stil specific (peste tema globala BOBO-Dark) */
+.bobo-video { background-color: #000000; }
+
+.bobo-controls {
+    background-color: alpha(#0f1830, 0.86);
+    border-radius: 12px;
+    padding: 8px 10px;
+}
+.bobo-controls button {
+    min-width: 34px;
+    min-height: 34px;
+    border-radius: 8px;
+}
+.bobo-controls button:hover { background-color: alpha(#4a9eff, 0.30); }
+
+.bobo-active { color: #4a9eff; }
+
+.bobo-playlist {
+    background-color: #141d33;
+    border-left: 1px solid #2a3550;
+}
+.bobo-playlist row:selected { background-color: alpha(#4a9eff, 0.30); }
+
+scale highlight { background-color: #4a9eff; }
+scale slider { background-color: #e8eaf6; }

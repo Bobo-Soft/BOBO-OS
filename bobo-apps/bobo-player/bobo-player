@@ -1,0 +1,3 @@
+#!/bin/bash
+# Launcher BoboPlayer - APP 01 BOBO OS
+exec python3 /usr/share/bobo-player/player.py "$@"

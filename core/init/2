@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# =============================================================================
+# BOBO OS — runit Stage 2
+# /etc/runit/2
+#
+# Stage 2 is the main service supervisor loop.
+# It starts runsvdir which watches /etc/service/ and manages all services.
+# This process runs for the entire lifetime of the OS — it exits only
+# when Stage 3 (shutdown) is triggered.
+# =============================================================================
+
+exec >/dev/console 2>&1
+
+echo "==> BOBO OS Stage 2: starting service supervisor..."
+
+# ---------------------------------------------------------------------------
+# Start the runit service directory supervisor
+# Services in /etc/service/ are started in parallel by runsvdir.
+# Each service has its own run/finish/log scripts.
+# ---------------------------------------------------------------------------
+exec env - PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
+  runsvdir -P /etc/service 'log: ................................................'

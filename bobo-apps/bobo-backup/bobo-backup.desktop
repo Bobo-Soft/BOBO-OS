@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=BoboBackup
+Comment=Backup incremental cu BorgBackup si rclone
+Exec=bobo-backup
+Icon=bobo-backup
+Terminal=false
+Type=Application
+Categories=BOBO;System;Utility;
+StartupNotify=true
+StartupWMClass=bobo-backup

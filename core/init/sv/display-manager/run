@@ -1,0 +1,23 @@
+#!/usr/bin/env sh
+# runit service: display-manager
+# Starts Wayfire (Wayland compositor + window manager) as the graphical session.
+# Depends on: udev settled, GPU driver loaded.
+exec 2>&1
+
+# Wait until udev has settled (GPU node must exist before Wayland can open it)
+udevadm settle --timeout=15 2>/dev/null || true
+
+# Set the XDG runtime directory for the graphical user (uid 1000 by default)
+export XDG_RUNTIME_DIR=/run/user/1000
+mkdir -p "${XDG_RUNTIME_DIR}"
+chmod 0700 "${XDG_RUNTIME_DIR}"
+chown 1000:1000 "${XDG_RUNTIME_DIR}"
+
+# Start Wayfire as the graphical user — never run the compositor as root
+exec chpst -u bobo \
+  env \
+    XDG_RUNTIME_DIR=/run/user/1000 \
+    WAYLAND_DISPLAY=wayland-1 \
+    WLR_NO_HARDWARE_CURSORS=0 \
+    WLR_RENDERER=auto \
+  /usr/bin/wayfire -c /etc/wayfire/wayfire.ini

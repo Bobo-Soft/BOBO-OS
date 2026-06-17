@@ -1,0 +1,3 @@
+#!/bin/bash
+# Launcher BoboClip - APP 21 BOBO OS
+exec python3 /usr/share/bobo-clip/clip.py "$@"

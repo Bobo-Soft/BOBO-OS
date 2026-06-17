@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=BoboVM
+Comment=Manager de masini virtuale QEMU/KVM
+Exec=bobo-vm
+Icon=bobo-vm
+Terminal=false
+Type=Application
+Categories=BOBO;System;Emulator;
+StartupNotify=true
+StartupWMClass=bobo-vm

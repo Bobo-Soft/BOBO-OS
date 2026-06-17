@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=BoboShare
+Comment=Transfer de fisiere in reteaua locala
+Exec=bobo-share
+Icon=bobo-share
+Terminal=false
+Type=Application
+Categories=BOBO;Network;FileTransfer;
+StartupNotify=true
+StartupWMClass=bobo-share

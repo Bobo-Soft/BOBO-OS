@@ -1,0 +1,3 @@
+#!/bin/bash
+# Launcher BoboPhone - APP 29 BOBO OS
+exec python3 /usr/share/bobo-phone/phone.py "$@"

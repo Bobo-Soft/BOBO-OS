@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=BoboMonitor
+Comment=Monitor sistem si manager de procese
+Exec=bobo-monitor
+Icon=bobo-monitor
+Terminal=false
+Type=Application
+Categories=BOBO;System;Monitor;
+StartupNotify=true
+StartupWMClass=bobo-monitor

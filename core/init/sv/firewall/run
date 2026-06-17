@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+# runit service: firewall
+# Applies nftables firewall rules at boot.
+# This service runs once (not a daemon) — it exits after rules are loaded.
+exec 2>&1
+exec /usr/local/lib/bobo/security/firewall-setup.sh

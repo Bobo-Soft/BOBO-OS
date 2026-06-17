@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=BoboLogin
+Comment=Ecran de autentificare BOBO OS
+Exec=bobo-login
+Icon=bobo-login
+Terminal=false
+Type=Application
+Categories=BOBO;System;
+NoDisplay=true
+StartupWMClass=bobo-login

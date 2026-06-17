@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=BoboUsers
+Comment=Gestionare conturi de utilizator
+Exec=bobo-users
+Icon=bobo-users
+Terminal=false
+Type=Application
+Categories=BOBO;Settings;System;
+StartupNotify=true
+StartupWMClass=bobo-users

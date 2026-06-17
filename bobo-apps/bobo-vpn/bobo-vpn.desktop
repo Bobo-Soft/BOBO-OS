@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=BoboVPN
+Comment=Client VPN WireGuard si OpenVPN
+Exec=bobo-vpn
+Icon=bobo-vpn
+Terminal=false
+Type=Application
+Categories=BOBO;Network;Security;
+StartupNotify=true
+StartupWMClass=bobo-vpn

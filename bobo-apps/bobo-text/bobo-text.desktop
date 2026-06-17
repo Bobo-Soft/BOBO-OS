@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=BoboText
+Comment=Editor de text cu evidentiere sintaxa
+Exec=bobo-text %F
+Icon=bobo-text
+Terminal=false
+Type=Application
+Categories=BOBO;Utility;TextEditor;Development;
+MimeType=text/plain;application/json;application/xml;application/x-shellscript;text/x-python;text/x-csrc;text/html;text/css;text/markdown;text/x-yaml;
+StartupNotify=true
+StartupWMClass=bobo-text

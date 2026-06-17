@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+# runit service: clamav
+# ClamAV antivirus daemon — scans files on demand and on access.
+# clamd listens on a UNIX socket; on-access scanning via fanotify.
+exec 2>&1
+# Ensure virus database is present before starting
+if [ ! -f /var/lib/clamav/main.cvd ] && [ ! -f /var/lib/clamav/main.cld ]; then
+  freshclam 2>/dev/null || true
+fi
+exec /usr/sbin/clamd --foreground

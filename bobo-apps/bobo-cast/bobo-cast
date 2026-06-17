@@ -1,0 +1,3 @@
+#!/bin/bash
+# Launcher BoboCast - APP 28 BOBO OS
+exec python3 /usr/share/bobo-cast/cast.py "$@"

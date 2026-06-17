@@ -1,0 +1,3 @@
+#!/bin/bash
+# Launcher BoboUpdate - APP 10 BOBO OS
+exec python3 /usr/share/bobo-update/update.py "$@"

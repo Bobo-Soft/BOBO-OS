@@ -1,0 +1,3 @@
+#!/bin/bash
+# Launcher BoboCoin - APP 32 BOBO OS
+exec python3 /usr/share/bobo-coin/coin.py "$@"

@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=BoboCode
+Comment=Mediu de dezvoltare cu LSP, terminal si Git
+Exec=bobo-code %F
+Icon=bobo-code
+Terminal=false
+Type=Application
+Categories=BOBO;Development;IDE;
+MimeType=text/x-python;text/x-csrc;text/x-chdr;application/javascript;text/x-shellscript;inode/directory;
+StartupNotify=true
+StartupWMClass=bobo-code

@@ -1,0 +1,3 @@
+#!/bin/bash
+# Launcher BoboSearch - APP 16 BOBO OS
+exec python3 /usr/share/bobo-search/search.py "$@"

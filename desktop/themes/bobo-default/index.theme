@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=BOBO Default
+Comment=BOBO OS dark theme with blue accent — GTK4 and Qt6
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+GtkTheme=bobo-default
+MetacityTheme=bobo-default
+IconTheme=Fluent-dark
+CursorTheme=bobo-cursor
+ButtonLayout=close,minimize,maximize:

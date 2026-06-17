@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=BoboMail
+Comment=Client de email IMAP/SMTP
+Exec=bobo-mail
+Icon=bobo-mail
+Terminal=false
+Type=Application
+Categories=BOBO;Network;Email;
+MimeType=x-scheme-handler/mailto;
+StartupNotify=true
+StartupWMClass=bobo-mail

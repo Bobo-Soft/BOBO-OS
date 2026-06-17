@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+# runit service: novastore-backend
+# FastAPI-based app store backend — serves app listings and manages installs.
+# Listens on 127.0.0.1:8740 (local only — not exposed to network).
+exec 2>&1
+exec /usr/bin/python3 -m uvicorn \
+  bobo.novastore.main:app \
+  --host 127.0.0.1 \
+  --port 8740 \
+  --workers 2 \
+  --log-level warning

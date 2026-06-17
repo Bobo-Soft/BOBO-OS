@@ -1,0 +1,3 @@
+#!/bin/bash
+# Launcher BoboDesk - APP 19 BOBO OS
+exec python3 /usr/share/bobo-desk/desk.py "$@"

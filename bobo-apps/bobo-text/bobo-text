@@ -1,0 +1,3 @@
+#!/bin/bash
+# Launcher BoboText - APP 04 BOBO OS
+exec python3 /usr/share/bobo-text/editor.py "$@"

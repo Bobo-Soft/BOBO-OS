@@ -1,0 +1,3 @@
+#!/bin/bash
+# Launcher BoboNotif - APP 17 BOBO OS
+exec python3 /usr/share/bobo-notif/notif.py "$@"

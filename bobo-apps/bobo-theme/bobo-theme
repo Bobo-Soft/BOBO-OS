@@ -1,0 +1,3 @@
+#!/bin/bash
+# Launcher BoboTheme - APP 18 BOBO OS
+exec python3 /usr/share/bobo-theme/theme.py "$@"

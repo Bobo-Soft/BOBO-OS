@@ -1,0 +1,3 @@
+#!/bin/bash
+# Launcher BoboPrinter - APP 12 BOBO OS
+exec python3 /usr/share/bobo-printer/printer.py "$@"

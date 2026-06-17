@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+# runit service: bluetoothd
+# BlueZ daemon — manages Bluetooth adapters and connections.
+exec 2>&1
+modprobe bluetooth 2>/dev/null || true
+exec /usr/lib/bluetooth/bluetoothd --nodetach

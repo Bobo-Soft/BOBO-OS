@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+# Pipe display-manager stdout/stderr through svlogd
+exec svlogd -tt /var/log/bobo/display-manager/

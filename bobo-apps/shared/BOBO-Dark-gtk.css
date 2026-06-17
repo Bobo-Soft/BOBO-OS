@@ -1,0 +1,39 @@
+/* =============================================================================
+ * BOBO OS - Tema GTK4 globala "BOBO-Dark"
+ * Instalata in /usr/share/themes/BOBO-Dark/gtk-4.0/gtk.css
+ * Culori brand: fundal #1a1a2e, accent #4a9eff
+ * ========================================================================== */
+
+@define-color accent_color        #4a9eff;
+@define-color accent_bg_color      #4a9eff;
+@define-color accent_fg_color      #ffffff;
+@define-color window_bg_color      #1a1a2e;
+@define-color window_fg_color      #e8eaf6;
+@define-color view_bg_color        #16213e;
+@define-color view_fg_color        #e8eaf6;
+@define-color headerbar_bg_color   #0f3460;
+@define-color headerbar_fg_color   #e8eaf6;
+@define-color card_bg_color        #16213e;
+@define-color card_fg_color        #e8eaf6;
+@define-color popover_bg_color     #16213e;
+@define-color popover_fg_color     #e8eaf6;
+@define-color sidebar_bg_color     #141d33;
+@define-color sidebar_fg_color     #e8eaf6;
+@define-color dialog_bg_color      #1a1a2e;
+@define-color error_color          #ff5d5d;
+@define-color warning_color        #ffb454;
+@define-color success_color        #4ade80;
+@define-color borders              #2a3550;
+
+/* Aspect general */
+window            { background-color: @window_bg_color; color: @window_fg_color; }
+headerbar         { background: @headerbar_bg_color; color: @headerbar_fg_color; }
+.bobo-accent      { color: @accent_color; }
+button.suggested-action { background: @accent_bg_color; color: @accent_fg_color; }
+button.suggested-action:hover { background: shade(@accent_bg_color, 1.12); }
+progressbar progress, scale highlight { background-color: @accent_color; }
+.card             { background: @card_bg_color; border-radius: 10px; }
+list, treeview    { background: @view_bg_color; }
+row:selected, *:selected { background-color: alpha(@accent_color, 0.30); }
+entry:focus       { border-color: @accent_color; box-shadow: 0 0 0 2px alpha(@accent_color,0.35); }
+tooltip           { background: #0f3460; color: #e8eaf6; }

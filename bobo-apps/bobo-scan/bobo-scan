@@ -1,0 +1,3 @@
+#!/bin/bash
+# Launcher BoboScan - APP 31 BOBO OS
+exec python3 /usr/share/bobo-scan/scan.py "$@"

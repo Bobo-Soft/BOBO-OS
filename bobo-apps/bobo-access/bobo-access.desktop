@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=BoboAccess
+Comment=Optiuni de accesibilitate
+Exec=bobo-access
+Icon=bobo-access
+Terminal=false
+Type=Application
+Categories=BOBO;Settings;Accessibility;
+StartupNotify=true
+StartupWMClass=bobo-access

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=BoboScan
+Comment=Antivirus si audit de securitate
+Exec=bobo-scan
+Icon=bobo-scan
+Terminal=false
+Type=Application
+Categories=BOBO;System;Security;
+StartupNotify=true
+StartupWMClass=bobo-scan

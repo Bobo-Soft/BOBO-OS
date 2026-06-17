@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=BoboClip Daemon
+Comment=Monitorizeaza clipboard-ul
+Exec=bobo-clip --daemon
+Icon=bobo-clip
+Terminal=false
+Type=Application
+Categories=BOBO;Utility;
+X-GNOME-Autostart-enabled=true
+NoDisplay=true

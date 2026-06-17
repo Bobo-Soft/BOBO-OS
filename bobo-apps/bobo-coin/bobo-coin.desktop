@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=BoboCoin
+Comment=Portofel crypto non-custodial (BTC/ETH)
+Exec=bobo-coin
+Icon=bobo-coin
+Terminal=false
+Type=Application
+Categories=BOBO;Office;Finance;
+StartupNotify=true
+StartupWMClass=bobo-coin

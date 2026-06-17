@@ -1,0 +1,3 @@
+#!/bin/bash
+# Launcher BoboSettings - APP 03 BOBO OS
+exec python3 /usr/share/bobo-settings/settings.py "$@"

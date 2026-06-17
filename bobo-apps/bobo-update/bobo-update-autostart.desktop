@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=BoboUpdate Daemon
+Comment=Verifica actualizari in fundal
+Exec=bobo-update --daemon
+Icon=bobo-update
+Terminal=false
+Type=Application
+Categories=BOBO;System;
+X-GNOME-Autostart-enabled=true
+NoDisplay=true

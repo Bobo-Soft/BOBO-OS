@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=BoboXcode
+Comment=IDE Swift/iOS cu BoboiOS Bridge pentru BOBO OS
+Exec=bobo-xcode %F
+Icon=bobo-xcode
+Terminal=false
+Type=Application
+Categories=BOBO;Development;IDE;
+MimeType=application/x-xcode-project;text/x-swift;
+StartupNotify=true
+StartupWMClass=bobo-xcode
+Keywords=swift;ios;xcode;mobile;development;

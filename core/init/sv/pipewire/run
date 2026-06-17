@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+# runit service: pipewire
+# PipeWire handles audio and video routing for all apps.
+# Replaces PulseAudio and JACK. Started as the graphical user (not root).
+exec 2>&1
+export XDG_RUNTIME_DIR=/run/user/1000
+exec chpst -u bobo \
+  env XDG_RUNTIME_DIR=/run/user/1000 \
+  /usr/bin/pipewire

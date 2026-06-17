@@ -1,0 +1,3 @@
+#!/bin/bash
+# Launcher BoboVPN - APP 22 BOBO OS
+exec python3 /usr/share/bobo-vpn/vpn.py "$@"

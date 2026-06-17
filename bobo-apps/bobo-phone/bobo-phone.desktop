@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=BoboPhone
+Comment=Integrare telefon (KDE Connect)
+Exec=bobo-phone
+Icon=bobo-phone
+Terminal=false
+Type=Application
+Categories=BOBO;Network;Utility;
+StartupNotify=true
+StartupWMClass=bobo-phone

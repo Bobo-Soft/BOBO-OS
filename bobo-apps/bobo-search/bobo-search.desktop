@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=BoboSearch
+Comment=Cautare globala in sistem
+Exec=bobo-search
+Icon=bobo-search
+Terminal=false
+Type=Application
+Categories=BOBO;Utility;
+StartupNotify=true
+StartupWMClass=bobo-search

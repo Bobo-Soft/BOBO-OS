@@ -1,0 +1,7 @@
+#!/bin/bash
+# Launcher BoboInstaller - APP 09 BOBO OS (cere privilegii root)
+if [ "$(id -u)" -ne 0 ]; then
+  exec pkexec python3 /usr/share/bobo-installer/installer.py "$@"
+else
+  exec python3 /usr/share/bobo-installer/installer.py "$@"
+fi

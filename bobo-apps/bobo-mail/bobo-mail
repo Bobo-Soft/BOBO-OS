@@ -1,0 +1,3 @@
+#!/bin/bash
+# Launcher BoboMail - APP 08 BOBO OS
+exec python3 /usr/share/bobo-mail/mail.py "$@"

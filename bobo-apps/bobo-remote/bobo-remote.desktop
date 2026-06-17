@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=BoboRemote
+Comment=Acces la distanta RDP, VNC, SSH, SFTP
+Exec=bobo-remote
+Icon=bobo-remote
+Terminal=false
+Type=Application
+Categories=BOBO;Network;RemoteAccess;
+StartupNotify=true
+StartupWMClass=bobo-remote

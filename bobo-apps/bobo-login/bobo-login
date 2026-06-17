@@ -1,0 +1,3 @@
+#!/bin/bash
+# Launcher BoboLogin - APP 14 BOBO OS (greeter)
+exec python3 /usr/share/bobo-login/login.py "$@"

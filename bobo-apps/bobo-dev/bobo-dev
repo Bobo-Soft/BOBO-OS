@@ -1,0 +1,3 @@
+#!/bin/bash
+# Launcher BoboDev - APP 27 BOBO OS
+exec python3 /usr/share/bobo-dev/dev.py "$@"

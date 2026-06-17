@@ -1,0 +1,3 @@
+#!/bin/bash
+# Launcher BoboVM - APP 26 BOBO OS
+exec python3 /usr/share/bobo-vm/vm.py "$@"

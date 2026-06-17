@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=BoboDesk
+Comment=Manager de desktop-uri virtuale
+Exec=bobo-desk
+Icon=bobo-desk
+Terminal=false
+Type=Application
+Categories=BOBO;System;DesktopSettings;
+StartupNotify=true
+StartupWMClass=bobo-desk

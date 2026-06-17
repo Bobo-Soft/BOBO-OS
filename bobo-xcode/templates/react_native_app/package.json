@@ -1,0 +1,19 @@
+{
+  "name": "BoboReactNativeApp",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "react-native start",
+    "ios": "react-native run-ios",
+    "android": "react-native run-android",
+    "test": "jest"
+  },
+  "dependencies": {
+    "react": "18.2.0",
+    "react-native": "0.74.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.0",
+    "jest": "^29.6.3"
+  }
+}

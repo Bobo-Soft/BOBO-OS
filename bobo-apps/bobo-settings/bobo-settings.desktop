@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=BoboSettings
+Comment=Centru de control si setari BOBO OS
+Exec=bobo-settings
+Icon=bobo-settings
+Terminal=false
+Type=Application
+Categories=BOBO;Settings;System;
+StartupNotify=true
+StartupWMClass=bobo-settings

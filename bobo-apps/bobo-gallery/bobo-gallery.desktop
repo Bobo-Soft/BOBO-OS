@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=BoboGallery
+Comment=Vizualizator de imagini cu galerie
+Exec=bobo-gallery %F
+Icon=bobo-gallery
+Terminal=false
+Type=Application
+Categories=BOBO;Graphics;Viewer;Photography;
+MimeType=image/jpeg;image/png;image/gif;image/webp;image/bmp;image/tiff;image/svg+xml;image/avif;image/heic;
+StartupNotify=true
+StartupWMClass=bobo-gallery

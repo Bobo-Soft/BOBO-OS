@@ -1,0 +1,3 @@
+#!/bin/bash
+# Launcher BoboShare - APP 23 BOBO OS
+exec python3 /usr/share/bobo-share/share.py "$@"

@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+# runit service: novasync
+# Cloud sync daemon — syncs iCloud, OneDrive, Google Drive in background.
+# Runs as the graphical user to access user's home directory and credentials.
+exec 2>&1
+until [ -S /run/dbus/system_bus_socket ]; do sleep 0.5; done
+export XDG_RUNTIME_DIR=/run/user/1000
+exec chpst -u bobo \
+  env XDG_RUNTIME_DIR=/run/user/1000 \
+  /usr/bin/python3 /usr/local/lib/bobo/novasync/novasync-daemon.py

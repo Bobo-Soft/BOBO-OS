@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=BoboTheme
+Comment=Personalizare teme si aspect
+Exec=bobo-theme
+Icon=bobo-theme
+Terminal=false
+Type=Application
+Categories=BOBO;Settings;DesktopSettings;
+StartupNotify=true
+StartupWMClass=bobo-theme

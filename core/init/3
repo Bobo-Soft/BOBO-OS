@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+# =============================================================================
+# BOBO OS — runit Stage 3
+# /etc/runit/3
+#
+# Stage 3 runs on shutdown or reboot.
+# Tasks: stop all services, save entropy, sync filesystems, power off / reboot.
+# Must be robust — runs even if Stage 2 crashed.
+# =============================================================================
+
+exec >/dev/console 2>&1
+
+echo "==> BOBO OS Stage 3: shutting down..."
+
+# ---------------------------------------------------------------------------
+# Send SIGTERM to all running processes (give them 5 seconds to exit cleanly)
+# ---------------------------------------------------------------------------
+echo "  [stop] Sending SIGTERM to all user processes..."
+kill -TERM -1 2>/dev/null || true
+sleep 2
+
+# ---------------------------------------------------------------------------
+# Tell runsvdir to bring down all runit services
+# ---------------------------------------------------------------------------
+if command -v sv &>/dev/null; then
+  sv force-stop /etc/service/* 2>/dev/null || true
+fi
+echo "  [stop] All services stopped."
+
+# ---------------------------------------------------------------------------
+# Save entropy pool for next boot (speeds up /dev/urandom init)
+# ---------------------------------------------------------------------------
+mkdir -p /var/lib/bobo
+dd if=/dev/urandom of=/var/lib/bobo/random-seed bs=512 count=1 2>/dev/null || true
+echo "  [ent]  Entropy pool saved."
+
+# ---------------------------------------------------------------------------
+# Disable zram swap and release memory
+# ---------------------------------------------------------------------------
+swapoff /dev/zram0 2>/dev/null || true
+echo 1 > /sys/block/zram0/reset 2>/dev/null || true
+echo "  [zram] zram released."
+
+# ---------------------------------------------------------------------------
+# Sync all filesystems to disk before unmounting
+# ---------------------------------------------------------------------------
+sync
+echo "  [sync] Filesystems synchronised."
+
+# ---------------------------------------------------------------------------
+# Unmount all non-essential filesystems (reverse order of Stage 1 mounts)
+# ---------------------------------------------------------------------------
+umount -a -r 2>/dev/null || true
+echo "  [umnt] Filesystems unmounted."
+
+# ---------------------------------------------------------------------------
+# Power off or reboot based on signal received from runit
+# /etc/runit/reboot  → reboot
+# /etc/runit/stopit  → poweroff (default)
+# ---------------------------------------------------------------------------
+if [[ -f /etc/runit/reboot ]]; then
+  echo "==> Rebooting..."
+  reboot -f
+else
+  echo "==> Powering off. Goodbye."
+  poweroff -f
+fi

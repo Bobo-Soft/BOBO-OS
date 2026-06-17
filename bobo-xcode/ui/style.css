@@ -1,0 +1,30 @@
+/* BoboXcode — inherits the global BOBO-Dark theme; only adds IDE specifics. */
+
+.bobo-publish-btn {
+    background: linear-gradient(135deg, #4a9eff, #0066cc);
+    color: #ffffff;
+    font-weight: bold;
+    border-radius: 8px;
+    padding: 6px 16px;
+    border: none;
+    box-shadow: 0 2px 8px rgba(74, 158, 255, 0.4);
+}
+.bobo-publish-btn:hover {
+    background: linear-gradient(135deg, #5aaeff, #0077dd);
+    box-shadow: 0 4px 12px rgba(74, 158, 255, 0.6);
+}
+
+.bobo-status-bar {
+    font-size: 11px;
+    color: alpha(currentColor, 0.6);
+    padding: 4px 8px;
+    background: alpha(@window_bg_color, 0.8);
+}
+
+.build-output {
+    font-family: "JetBrains Mono", "Fira Code", monospace;
+    font-size: 12px;
+}
+.build-error   { color: #ff6b6b; }
+.build-warning { color: #ffd93d; }
+.build-success { color: #6bcb77; }

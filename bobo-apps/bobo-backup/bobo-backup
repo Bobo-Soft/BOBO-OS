@@ -1,0 +1,3 @@
+#!/bin/bash
+# Launcher BoboBackup - APP 11 BOBO OS
+exec python3 /usr/share/bobo-backup/backup.py "$@"

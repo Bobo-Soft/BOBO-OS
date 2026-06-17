@@ -1,0 +1,353 @@
+/* =============================================================================
+ * BOBO OS — GTK4 Theme Stylesheet
+ * E:\BOBO-OS\desktop\themes\bobo-default\gtk.css
+ *
+ * Design tokens applied:
+ *   Background: #1a1a2e (dark)  /  #f5f5f5 (light)
+ *   Accent:     #4a9eff (dark)  /  #0066cc (light)
+ *   Corner radius: 8px
+ *   Font: Inter, Segoe UI, system-ui
+ *   Animation: 150ms ease-in-out
+ *   Shadow: 0 4px 24px rgba(0,0,0,0.4)
+ * ============================================================================= */
+
+/* Import color variables (dark mode default; light mode overrides these) */
+@import "colors-dark.css";
+
+/* ── Base ─────────────────────────────────────────────────────────────────── */
+
+* {
+  font-family: Inter, "Segoe UI", system-ui, sans-serif;
+  -gtk-icon-style: symbolic;
+  outline-color: alpha(@accent_color, 0.8);
+  outline-offset: -2px;
+  outline-radius: 4px;
+  outline-width: 2px;
+}
+
+window,
+.background {
+  background-color: @window_bg_color;
+  color: @window_fg_color;
+}
+
+/* ── Header bars ──────────────────────────────────────────────────────────── */
+
+headerbar {
+  background-color: @headerbar_bg_color;
+  color: @headerbar_fg_color;
+  border-bottom: 1px solid @headerbar_border_color;
+  min-height: 46px;
+  padding: 0 12px;
+  box-shadow: none;
+}
+
+headerbar .title {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* ── Window decorations ───────────────────────────────────────────────────── */
+
+decoration {
+  border-radius: 8px 8px 0 0;
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.40),
+    0 1px 4px  rgba(0, 0, 0, 0.25);
+}
+
+decoration:backdrop {
+  box-shadow:
+    0 2px 12px rgba(0, 0, 0, 0.20);
+}
+
+/* ── Buttons ──────────────────────────────────────────────────────────────── */
+
+button {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  border: 1px solid @border_color;
+  color: @window_fg_color;
+  padding: 6px 16px;
+  min-height: 32px;
+  transition: all 150ms ease-in-out;
+}
+
+button:hover {
+  background-color: rgba(255, 255, 255, 0.14);
+}
+
+button:active {
+  background-color: rgba(255, 255, 255, 0.20);
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.25);
+}
+
+button:disabled {
+  color: @disabled_fg_color;
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+/* Suggested action (primary) button */
+button.suggested-action,
+.dialog-action-area button.suggested-action {
+  background-color: @accent_bg_color;
+  color: @accent_fg_color;
+  border-color: @accent_bg_color;
+  font-weight: 600;
+}
+
+button.suggested-action:hover {
+  background-color: mix(@accent_bg_color, white, 0.85);
+}
+
+/* Destructive action button */
+button.destructive-action {
+  background-color: @destructive_bg_color;
+  color: @destructive_fg_color;
+  border-color: @destructive_bg_color;
+  font-weight: 600;
+}
+
+button.flat {
+  background-color: transparent;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+button.flat:hover {
+  background-color: rgba(255,255,255,0.10);
+}
+
+/* ── Entries (text inputs) ───────────────────────────────────────────────── */
+
+entry {
+  background-color: @view_bg_color;
+  color: @view_fg_color;
+  border: 1px solid @border_color;
+  border-radius: 6px;
+  padding: 6px 10px;
+  min-height: 32px;
+  transition: border-color 150ms ease-in-out;
+}
+
+entry:focus {
+  border-color: @accent_color;
+  box-shadow: 0 0 0 2px alpha(@accent_color, 0.30);
+}
+
+entry:disabled {
+  color: @disabled_fg_color;
+  background-color: rgba(255,255,255,0.04);
+}
+
+/* ── Lists and rows ────────────────────────────────────────────────────────── */
+
+listbox {
+  background-color: transparent;
+}
+
+listbox row {
+  padding: 4px 0;
+  border-radius: 6px;
+  transition: background-color 150ms ease-in-out;
+}
+
+listbox row:hover {
+  background-color: rgba(255,255,255,0.07);
+}
+
+listbox row:selected {
+  background-color: rgba(74,158,255,0.20);
+  color: @window_fg_color;
+}
+
+/* Adwaita boxed-list style */
+.boxed-list {
+  background-color: @card_bg_color;
+  border-radius: 12px;
+  border: 1px solid @border_color;
+  overflow: hidden;
+}
+
+.boxed-list row {
+  border-radius: 0;
+  border-bottom: 1px solid @border_color;
+  min-height: 48px;
+  padding: 0 16px;
+}
+
+.boxed-list row:last-child {
+  border-bottom: none;
+}
+
+/* ── Cards ─────────────────────────────────────────────────────────────────── */
+
+.card {
+  background-color: @card_bg_color;
+  border-radius: 12px;
+  border: 1px solid @border_color;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+  padding: 16px;
+}
+
+/* ── Sidebar ───────────────────────────────────────────────────────────────── */
+
+.sidebar {
+  background-color: @sidebar_bg_color;
+  border-right: 1px solid @sidebar_border_color;
+}
+
+/* ── Popovers ───────────────────────────────────────────────────────────────── */
+
+popover contents {
+  background-color: @popover_bg_color;
+  color: @popover_fg_color;
+  border-radius: 10px;
+  border: 1px solid @border_color;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+  padding: 8px;
+}
+
+/* ── Tooltips ───────────────────────────────────────────────────────────────── */
+
+tooltip {
+  background-color: @tooltip_bg_color;
+  color: @tooltip_fg_color;
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 12px;
+}
+
+/* ── Switches ───────────────────────────────────────────────────────────────── */
+
+switch {
+  border-radius: 50px;
+  background-color: rgba(255,255,255,0.15);
+  transition: background-color 150ms ease-in-out;
+}
+
+switch:checked {
+  background-color: @accent_color;
+}
+
+switch slider {
+  background-color: white;
+  border-radius: 50px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+}
+
+/* ── Progress bars ─────────────────────────────────────────────────────────── */
+
+progressbar trough {
+  background-color: rgba(255,255,255,0.10);
+  border-radius: 50px;
+  min-height: 6px;
+}
+
+progressbar progress {
+  background-color: @accent_color;
+  border-radius: 50px;
+}
+
+/* ── Scale sliders ──────────────────────────────────────────────────────────── */
+
+scale trough {
+  background-color: rgba(255,255,255,0.12);
+  border-radius: 50px;
+  min-height: 4px;
+}
+
+scale highlight {
+  background-color: @accent_color;
+  border-radius: 50px;
+}
+
+scale slider {
+  background-color: white;
+  border-radius: 50%;
+  min-width: 16px;
+  min-height: 16px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+}
+
+/* ── Scrollbars ─────────────────────────────────────────────────────────────── */
+
+scrollbar {
+  background-color: transparent;
+}
+
+scrollbar slider {
+  background-color: rgba(255,255,255,0.20);
+  border-radius: 50px;
+  min-width: 6px;
+  min-height: 6px;
+  transition: background-color 150ms ease-in-out;
+}
+
+scrollbar slider:hover {
+  background-color: rgba(255,255,255,0.35);
+}
+
+scrollbar.hovering slider {
+  min-width: 8px;
+  min-height: 8px;
+}
+
+/* ── Checkboxes ──────────────────────────────────────────────────────────────── */
+
+checkbutton check {
+  background-color: @view_bg_color;
+  border: 1px solid @border_color;
+  border-radius: 4px;
+  min-width: 18px;
+  min-height: 18px;
+  transition: all 150ms ease-in-out;
+}
+
+checkbutton check:checked {
+  background-color: @accent_color;
+  border-color: @accent_color;
+  color: white;
+}
+
+/* ── Tabs ─────────────────────────────────────────────────────────────────────── */
+
+tabbar tab {
+  border-radius: 8px 8px 0 0;
+  transition: background-color 150ms ease-in-out;
+}
+
+tabbar tab:checked {
+  background-color: @view_bg_color;
+}
+
+/* ── Notifications (toast) ────────────────────────────────────────────────────── */
+
+.toast {
+  background-color: @card_bg_color;
+  border-radius: 10px;
+  border: 1px solid @border_color;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.35);
+  padding: 10px 16px;
+  color: @window_fg_color;
+  font-size: 13px;
+}
+
+/* ── Typography helpers ───────────────────────────────────────────────────────── */
+
+.title-1  { font-size: 28px; font-weight: 800; }
+.title-2  { font-size: 22px; font-weight: 700; }
+.title-3  { font-size: 18px; font-weight: 600; }
+.title-4  { font-size: 15px; font-weight: 600; }
+.body     { font-size: 13px; }
+.caption  { font-size: 12px; }
+.monospace { font-family: "JetBrains Mono", "Cascadia Code", monospace; }
+
+.dim-label { color: @dim_label_color; }
+
+/* ── Animations ───────────────────────────────────────────────────────────────── */
+/* GTK4 transitions use CSS animations; 150ms matches the design token */
+* {
+  transition-duration: 150ms;
+  transition-timing-function: ease-in-out;
+}

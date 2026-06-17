@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=BoboClip
+Comment=Istoric clipboard
+Exec=bobo-clip
+Icon=bobo-clip
+Terminal=false
+Type=Application
+Categories=BOBO;Utility;
+StartupNotify=true
+StartupWMClass=bobo-clip

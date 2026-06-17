@@ -1,0 +1,3 @@
+#!/bin/bash
+# Launcher BoboAccess - APP 13 BOBO OS
+exec python3 /usr/share/bobo-access/access.py "$@"

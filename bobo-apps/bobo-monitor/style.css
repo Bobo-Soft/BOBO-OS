@@ -1,0 +1,5 @@
+/* BoboMonitor - stil specific */
+.card { background-color: #16213e; border-radius: 10px; padding: 8px; }
+treeview { background-color: #16213e; }
+treeview:selected { background-color: alpha(#4a9eff, 0.30); }
+progressbar progress { background-color: #4a9eff; }

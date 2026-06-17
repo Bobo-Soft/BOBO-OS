@@ -1,0 +1,46 @@
+/* BOBO OS — Light Mode Color Variables */
+
+@define-color accent_color          #0066cc;
+@define-color accent_bg_color       #0066cc;
+@define-color accent_fg_color       #ffffff;
+
+@define-color window_bg_color       #f5f5f5;
+@define-color window_fg_color       #1a1a1a;
+
+@define-color view_bg_color         #ffffff;
+@define-color view_fg_color         #1a1a1a;
+
+@define-color headerbar_bg_color    #ebebeb;
+@define-color headerbar_fg_color    #1a1a1a;
+@define-color headerbar_border_color #d0d0d0;
+
+@define-color card_bg_color         #ffffff;
+@define-color card_fg_color         #1a1a1a;
+@define-color card_shade_color      rgba(0, 0, 0, 0.07);
+
+@define-color sidebar_bg_color      #f0f0f0;
+@define-color sidebar_fg_color      #1a1a1a;
+@define-color sidebar_border_color  #d0d0d0;
+
+@define-color popover_bg_color      #ffffff;
+@define-color popover_fg_color      #1a1a1a;
+
+@define-color error_color           #cc0000;
+@define-color error_bg_color        rgba(204, 0, 0, 0.12);
+@define-color warning_color         #cc7700;
+@define-color warning_bg_color      rgba(204, 119, 0, 0.12);
+@define-color success_color         #007733;
+@define-color success_bg_color      rgba(0, 119, 51, 0.12);
+
+@define-color destructive_color     #cc0000;
+@define-color destructive_bg_color  #cc0000;
+@define-color destructive_fg_color  #ffffff;
+
+@define-color border_color          #d0d0d0;
+@define-color dim_label_color       rgba(26, 26, 26, 0.45);
+@define-color disabled_fg_color     rgba(26, 26, 26, 0.35);
+
+@define-color tooltip_bg_color      #333333;
+@define-color tooltip_fg_color      #ffffff;
+
+@define-color scrollbar_outline_color rgba(0,0,0,0.15);

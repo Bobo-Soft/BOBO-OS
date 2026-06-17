@@ -1,0 +1,47 @@
+/* BOBO OS — Dark Mode Color Variables */
+/* Imported by gtk.css — override these for custom accent colors */
+
+@define-color accent_color          #4a9eff;
+@define-color accent_bg_color       #4a9eff;
+@define-color accent_fg_color       #ffffff;
+
+@define-color window_bg_color       #1a1a2e;
+@define-color window_fg_color       #ffffff;
+
+@define-color view_bg_color         #252540;
+@define-color view_fg_color         #ffffff;
+
+@define-color headerbar_bg_color    #1a1a2e;
+@define-color headerbar_fg_color    #ffffff;
+@define-color headerbar_border_color #3a3a5c;
+
+@define-color card_bg_color         rgba(37, 37, 64, 0.9);
+@define-color card_fg_color         #ffffff;
+@define-color card_shade_color      rgba(0, 0, 0, 0.2);
+
+@define-color sidebar_bg_color      rgba(26, 26, 46, 0.96);
+@define-color sidebar_fg_color      #ffffff;
+@define-color sidebar_border_color  #3a3a5c;
+
+@define-color popover_bg_color      #252540;
+@define-color popover_fg_color      #ffffff;
+
+@define-color error_color           #ff5555;
+@define-color error_bg_color        rgba(255, 85, 85, 0.15);
+@define-color warning_color         #ffaa00;
+@define-color warning_bg_color      rgba(255, 170, 0, 0.15);
+@define-color success_color         #55ff88;
+@define-color success_bg_color      rgba(85, 255, 136, 0.15);
+
+@define-color destructive_color     #ff5555;
+@define-color destructive_bg_color  #cc0000;
+@define-color destructive_fg_color  #ffffff;
+
+@define-color border_color          #3a3a5c;
+@define-color dim_label_color       rgba(255, 255, 255, 0.45);
+@define-color disabled_fg_color     rgba(255, 255, 255, 0.35);
+
+@define-color tooltip_bg_color      #3a3a5c;
+@define-color tooltip_fg_color      #ffffff;
+
+@define-color scrollbar_outline_color rgba(0,0,0,0.3);

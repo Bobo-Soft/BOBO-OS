@@ -1,0 +1,3 @@
+#!/bin/bash
+# Launcher BoboAI Local - APP 30 BOBO OS
+exec python3 /usr/share/bobo-ai-local/ai.py "$@"

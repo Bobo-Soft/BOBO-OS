@@ -1,0 +1,3 @@
+#!/bin/bash
+# Launcher BoboArchive - APP 07 BOBO OS
+exec python3 /usr/share/bobo-archive/archive.py "$@"

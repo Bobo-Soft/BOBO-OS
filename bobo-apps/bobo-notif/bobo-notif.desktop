@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=BoboNotif
+Comment=Centru de notificari
+Exec=bobo-notif --toggle
+Icon=bobo-notif
+Terminal=false
+Type=Application
+Categories=BOBO;System;
+StartupNotify=true
+StartupWMClass=bobo-notif

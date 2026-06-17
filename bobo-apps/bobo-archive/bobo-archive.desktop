@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=BoboArchive
+Comment=Manager de arhive (ZIP, 7z, RAR, TAR)
+Exec=bobo-archive %F
+Icon=bobo-archive
+Terminal=false
+Type=Application
+Categories=BOBO;Utility;Archiving;
+MimeType=application/zip;application/x-7z-compressed;application/vnd.rar;application/x-tar;application/gzip;application/x-bzip2;application/x-xz;
+StartupNotify=true
+StartupWMClass=bobo-archive
