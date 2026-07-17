@@ -16,10 +16,25 @@ linux-6.6*/
 boot/kernel/vmlinuz*
 
 # --- SEPARATE PRODUCTS (NOT part of BOBO OS — keep in their own repos) ------
+# These are PRIVATE products with their own repos; this repo is PUBLIC, so they
+# must never be committed here. (Extended 2026-07-18 by git-sweep.)
 bobo-ai/
 bobostudio/
 BoboStudio/
 terra-antiqua/
+orbis/
+overblast/
+istoria-lumii/
+persona-art-studio/
+protoface-test/
+export/
+
+# --- Audit / sweep reports (contain server IPs & internal notes — keep out of PUBLIC repo) ---
+AUDIT.md
+QUESTIONS.md
+PROGRESS.md
+GIT-SWEEP-REPORT.md
+BOBOSTUDIO-AUDIT.md
 
 # --- Secrets / credentials (never commit) -----------------------------------
 *.env
