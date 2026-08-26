@@ -24,8 +24,32 @@ ACCENT = "#4a9eff"
 FG = "#ffffff"
 PANEL = "#232342"
 HOVER = "#2d2d55"
-DDG = "https://duckduckgo.com/?q=%s&t=bobo&kp=1"   # kp=1 = safe search moderate; t=bobo = branding
+# BOBO Search (self-hosted SearXNG at search.boboai.eu) is the default engine; it
+# falls back to DuckDuckGo automatically when the BOBO Search server is unreachable.
+BOBO_SEARCH = "https://search.boboai.eu/search?q=%s"
+BOBO_SEARCH_HEALTH = "https://search.boboai.eu/healthz"
+DDG = "https://duckduckgo.com/?q=%s&t=bobo&kp=1"   # fallback; kp=1 safe search, t=bobo branding
 SUSPEND_AFTER = 5 * 60          # 5 minutes
+
+# Cached availability of BOBO Search so the omnibox never blocks per keystroke.
+_bs_ok = None
+_bs_checked = 0.0
+
+
+def bobo_search_available() -> bool:
+    """True if BOBO Search answers /healthz. Result cached for 5 minutes."""
+    global _bs_ok, _bs_checked
+    now = time.time()
+    if _bs_ok is not None and (now - _bs_checked) < 300:
+        return _bs_ok
+    try:
+        import urllib.request
+        with urllib.request.urlopen(BOBO_SEARCH_HEALTH, timeout=1.5) as r:
+            _bs_ok = (getattr(r, "status", r.getcode()) == 200)
+    except Exception:
+        _bs_ok = False
+    _bs_checked = now
+    return _bs_ok
 NEWTAB = "file://" + str(Path("/usr/share/bobo-browser/newtab.html"))
 
 CSS = f"""
@@ -67,7 +91,9 @@ def to_uri(text: str) -> str:
         if "://" in t or t.startswith(("about:", "file:")):
             return t
         return "https://" + t
-    return DDG % urllib.parse.quote(t)
+    q = urllib.parse.quote(t)
+    # Default to BOBO Search; fall back to DuckDuckGo if the server is unreachable.
+    return (BOBO_SEARCH % q) if bobo_search_available() else (DDG % q)
 
 
 class Tab:

@@ -160,6 +160,7 @@ E:\Program Files\
 | 18.1 | `bobo-shell/` — Windows-like desktop (GTK3+gtk-layer-shell): bottom auto-hide taskbar, Start menu, right action-center, desktop icons, Ctrl+Alt+Del screen, personalization (accent/theme). Pipeline Step 3e. `autostart_wf_shell=false` (kills top wf-panel) | DONE |
 | 18.2 | `bobo-browser/` — native WebKit2GTK browser: #1a1a2e/#4a9eff theme, DuckDuckGo private default (t=bobo), 5-min tab suspension, set as default browser. Pipeline Step 3f | DONE |
 | 18.3 | **Fixes-layer packaging** (WSL2 can't repack the 11 GB rootfs reliably): tiny `fixes.squashfs` overlaid at boot via a 2nd overlayfs lowerdir (`_apply_fixes_layer.sh`); init patched to mount it. Also tmpfs-output variant `_package_iso_tmpfs.sh` | DONE |
+| 20.1 | **BOBO Search** — SearXNG deployed on Hetzner (`167.233.65.176`, `/opt/bobo-search`, Docker, 127.0.0.1:8080), BOBO-branded settings.yml + real secret_key; nginx vhost `search.boboai.eu`→:8080 + ready `enable-ssl.sh` (certbot). Verified: healthz 200, real results via nginx. BOBO Browser uses BOBO Search default w/ DDG health-check fallback. **Pending: Namecheap A record `search.boboai.eu`→server (no DNS API creds available)** | DONE (server) / DNS pending |
 
 ---
 
