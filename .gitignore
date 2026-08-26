@@ -28,6 +28,7 @@ istoria-lumii/
 persona-art-studio/
 protoface-test/
 export/
+export_bobo.py
 
 # --- Audit / sweep reports (contain server IPs & internal notes — keep out of PUBLIC repo) ---
 AUDIT.md

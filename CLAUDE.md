@@ -147,6 +147,19 @@ E:\Program Files\
 | 13.1 | `bobo-xcode/` — IDE Swift/iOS + BoboiOS Bridge (26 .py, isolated; self-locating install.sh) | DONE |
 | 13.2 | Step 3b in `compile-bobo-os.ps1` — installs BoboXcode in chroot | DONE |
 | 13.3 | Super+X Wayfire shortcut (appended to `/etc/bobo-wayfire-defaults.ini`) | DONE |
+| 13.4 | FULL 2 GB ISO built + VirtualBox boot + GitHub publish (Bobo-Soft/BOBO-OS) + audit | DONE |
+| 13.5 | NovaLayer runtimes — Wine+DXVK / Waydroid / qemu-user-static / Flatpak / Darling wrapper; pipeline Step 3a (full mode) | DONE |
+| 14.1 | `bobo-office/` — 9 Office apps (Write/Calc/Present/Chart/Form/Sign/Translate/Mind/Hub) + shared layer, GTK4 | DONE |
+| 14.2 | `bobo-assist/` — local AI assistant (Ollama, offline; Phi-3 Mini default) with side panel + model manager | DONE |
+| 14.3 | Step 3c in `compile-bobo-os.ps1` — installs Bobo Office + BoboAssist in chroot; Super+O → BoboHub | DONE |
+| 15.1 | `bobo-voice/` — offline voice assistant (wake word, Whisper STT, TTS, 60+ intents, actions, overlay) | DONE |
+| 15.2 | Autostart `/etc/xdg/autostart/bobo-voice.desktop` (--daemon, 3s delay) + Super+Shift+V toggle | DONE |
+| 15.3 | Step 3d in `compile-bobo-os.ps1` — installs BoboVoice in chroot | DONE |
+| 16.1 | Full ISO (all SKIP_HEAVY=0): 11 GB rootfs → **2.95 GB bootable ISO** (valid SQUASHFS 4:0 superblock, BIOS+EFI). Fixed WSL2 VM crash during squashfs via native-ext4 + housekeeping (FIX 9); standalone repackager `_package_iso.sh` | DONE |
+| 17.1 | VirtualBox full test + 3 fixes: **GSK_RENDERER=cairo** (GTK4 apps render under vmwgfx) + **BOBO_ROOT** (NovaLayer wine-wrapper path) in `/etc/environment`; Super+A→bobo-assist; `.exe`→NovaLayer MIME handler. Verified BoboHub/BoboWrite/BoboAssist render; idle RAM 509 MiB | DONE |
+| 18.1 | `bobo-shell/` — Windows-like desktop (GTK3+gtk-layer-shell): bottom auto-hide taskbar, Start menu, right action-center, desktop icons, Ctrl+Alt+Del screen, personalization (accent/theme). Pipeline Step 3e. `autostart_wf_shell=false` (kills top wf-panel) | DONE |
+| 18.2 | `bobo-browser/` — native WebKit2GTK browser: #1a1a2e/#4a9eff theme, DuckDuckGo private default (t=bobo), 5-min tab suspension, set as default browser. Pipeline Step 3f | DONE |
+| 18.3 | **Fixes-layer packaging** (WSL2 can't repack the 11 GB rootfs reliably): tiny `fixes.squashfs` overlaid at boot via a 2nd overlayfs lowerdir (`_apply_fixes_layer.sh`); init patched to mount it. Also tmpfs-output variant `_package_iso_tmpfs.sh` | DONE |
 
 ---
 
@@ -224,6 +237,7 @@ E:\Program Files\
 | 6 | **`mksquashfs … -mem 512M -processors 2`** | Without a memory cap, mksquashfs OOM-wedges the WSL2 distro on 2 GB+ rootfs | compile-bobo-os.ps1 Step 5 |
 | 7 | **`noapic`** on every kernel cmdline | Kernel panics `IO-APIC + timer doesn't work!` under VirtualBox without it | boot\grub\grub.cfg; compile-bobo-os.ps1 Step 5 PRE (live grub.cfg) |
 | 8 | **Live-init mounts CD at `/cdrom`** + separate top-level `/lower /upper /newroot` (NOT `/mnt/squashfs` `/mnt/rootfs` which are subdirs of the read-only iso9660) | Old init → `mkdir /mnt/rootfs: Read-only file system`, overlay + switch_root fail | compile-bobo-os.ps1 Step 4 (busybox init heredoc) |
+| 9 | **Large-rootfs squashfs (10 GB+):** compress to **NATIVE ext4** (`/root/filesystem.squashfs`) then `cp` to the ISO tree; pack **single-threaded** `-mem 256M -processors 1` + `ionice/nice`; `sysctl vm.dirty_ratio=5 dirty_background_ratio=2 vfs_cache_pressure=200`; **background housekeeper** `sync + drop_caches` every 20 s; and **validate the superblock** (`unsquashfs -s`) before reusing/shipping | On the full SKIP_HEAVY=0 rootfs (~11 GB) writing squashfs straight to `/mnt/e` (DrvFs) OR letting page/inode cache + dirty buffers accumulate HARD-CRASHES the WSL2 utility VM (reboots mid-run, `Wsl/Service/0x80072746`, exit 253, no OOM logged) leaving a **truncated squashfs with no superblock → unbootable ISO**. Also `.wslconfig memory=10GB` (give the Windows host headroom) + `swap=16GB` | compile-bobo-os.ps1 Step 5; scripts\windows\_package_iso.sh (standalone repackage) |
 
 **Notes for any future kernel work:** the working full kernel config (1875 options, all 7
 fixes baked in) is saved at `boot\kernel\kernel.config`. The desktop runs as user `bobo`

@@ -1,0 +1,125 @@
+/* BOBO Shell — Windows-like theme. Placeholders replaced by shell_common.build_css(). */
+
+.bobo-taskbar,
+.bobo-sidebar,
+.bobo-startmenu,
+.bobo-cad,
+.bobo-desktop-panel {
+    background-color: @PANEL@;
+    color: @FG@;
+    font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+}
+
+/* ── Taskbar ─────────────────────────────────────────────────────────────── */
+.bobo-taskbar {
+    border-top: 1px solid @BORDER@;
+}
+.bobo-taskbar .tb-start {
+    background: transparent;
+    border: none;
+    padding: 4px 12px;
+    margin: 4px;
+    border-radius: @CORNER@px;
+}
+.bobo-taskbar .tb-start:hover { background-color: @HOVER@; }
+.bobo-taskbar .tb-item {
+    background: transparent;
+    border: none;
+    padding: 4px 8px;
+    margin: 4px 2px;
+    border-radius: @CORNER@px;
+    min-width: 40px;
+}
+.bobo-taskbar .tb-item:hover { background-color: @HOVER@; }
+.bobo-taskbar .tb-item.running { border-bottom: 2px solid @ACCENT@; }
+.bobo-taskbar .tb-clock {
+    padding: 2px 12px;
+    border-radius: @CORNER@px;
+}
+.bobo-taskbar .tb-clock:hover { background-color: @HOVER@; }
+.bobo-taskbar .tb-clock .time { font-size: 13px; font-weight: 600; }
+.bobo-taskbar .tb-clock .date { font-size: 11px; opacity: 0.8; }
+.bobo-taskbar .tb-sys {
+    padding: 4px 8px;
+    margin: 4px;
+    border-radius: @CORNER@px;
+}
+.bobo-taskbar .tb-sys:hover { background-color: @HOVER@; }
+
+/* ── Start menu ──────────────────────────────────────────────────────────── */
+.bobo-startmenu {
+    border: 1px solid @BORDER@;
+    border-radius: @CORNER@px;
+}
+.bobo-startmenu .sm-search {
+    background-color: @BG@;
+    border: 1px solid @BORDER@;
+    border-radius: @CORNER@px;
+    padding: 6px 10px;
+    margin: 12px;
+}
+.bobo-startmenu .sm-tile {
+    background: transparent;
+    border: none;
+    border-radius: @CORNER@px;
+    padding: 10px;
+    margin: 3px;
+}
+.bobo-startmenu .sm-tile:hover { background-color: @HOVER@; }
+.bobo-startmenu .sm-tile label { font-size: 11px; }
+.bobo-startmenu .sm-power {
+    background: transparent;
+    border: none;
+    padding: 8px;
+    margin: 2px;
+    border-radius: @CORNER@px;
+}
+.bobo-startmenu .sm-power:hover { background-color: @HOVER@; }
+.bobo-startmenu .sm-user { font-size: 14px; font-weight: 600; padding: 8px 14px; }
+
+/* ── Right sidebar / action center ───────────────────────────────────────── */
+.bobo-sidebar { border-left: 1px solid @BORDER@; }
+.bobo-sidebar .sb-title { font-size: 15px; font-weight: 700; padding: 14px; }
+.bobo-sidebar .sb-tile {
+    background-color: @BG@;
+    border: 1px solid @BORDER@;
+    border-radius: @CORNER@px;
+    padding: 12px;
+    margin: 6px;
+}
+.bobo-sidebar .sb-tile.active { background-color: @ACCENT@; color: #ffffff; }
+.bobo-sidebar .sb-tile:hover { background-color: @HOVER@; }
+.bobo-sidebar scale trough { min-height: 6px; border-radius: 3px; }
+.bobo-sidebar scale highlight { background-color: @ACCENT@; border-radius: 3px; }
+
+/* ── Ctrl+Alt+Del screen ─────────────────────────────────────────────────── */
+.bobo-cad { background-color: rgba(10, 10, 22, 0.94); }
+.bobo-cad .cad-btn {
+    background: transparent;
+    color: #ffffff;
+    border: none;
+    font-size: 16px;
+    padding: 16px 24px;
+    margin: 4px;
+    border-radius: @CORNER@px;
+}
+.bobo-cad .cad-btn:hover { background-color: rgba(255,255,255,0.12); }
+.bobo-cad .cad-title { color: #ffffff; font-size: 26px; font-weight: 300; }
+
+/* ── Desktop icons ───────────────────────────────────────────────────────── */
+.bobo-desktop-icon {
+    background: transparent;
+    border: none;
+    border-radius: @CORNER@px;
+    padding: 8px;
+    color: #ffffff;
+}
+.bobo-desktop-icon:hover { background-color: rgba(74, 158, 255, 0.25); }
+.bobo-desktop-icon label {
+    text-shadow: 0 1px 3px rgba(0,0,0,0.9);
+    font-size: 12px;
+}
+
+/* Accent-coloured primary buttons used across the shell */
+.bobo-accent { background-color: @ACCENT@; color: #ffffff; border-radius: @CORNER@px; }
+.bobo-accent:hover { background-color: @ACCENT_SOFT@; }

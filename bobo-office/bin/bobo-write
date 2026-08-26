@@ -1,0 +1,5 @@
+#!/bin/bash
+# BoboWrite launcher (prefers the office venv which has system gi + office libs)
+PY=/usr/share/bobo-office/venv/bin/python3
+[ -x "$PY" ] || PY=python3
+exec "$PY" /usr/share/bobo-office/write/write.py "$@"

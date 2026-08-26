@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=BoboAssist
+Comment=Asistent AI local (offline) pentru Bobo Office
+Exec=bobo-assist
+Icon=bobo-assist
+Terminal=false
+Type=Application
+Categories=BOBO;Office;Utility;
+StartupNotify=true
+StartupWMClass=bobo-assist

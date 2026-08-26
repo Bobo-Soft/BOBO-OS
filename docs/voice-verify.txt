@@ -1,0 +1,20 @@
+=== import tests (voice venv, headless) ===
+bobo-voice modules: import OK
+faster-whisper: OK
+openwakeword:   OK
+sounddevice:    OK
+wake backend:   openwakeword
+tts backend:    espeak
+=== artifacts ===
+launcher: OK
+.desktop: OK
+.svg:     OK
+autostart:OK
+activation.wav: OK
+espeak-ng: OK
+playerctl: OK
+wtype/grim: OK
+=== merge Super+Shift+V into active wayfire.ini ===
+merged
+Super+Shift+V wired: YES
+DONE

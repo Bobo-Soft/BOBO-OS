@@ -1,0 +1,12 @@
+=== import tests (headless) ===
+bobo-assist ui.panel: import OK
+office submodules: import OK
+=== installed artifacts ===
+launchers in /usr/bin: 10
+.desktop entries:      10
+.svg icons:            10
+=== merge Super+O (command_hub) into active wayfire.ini ===
+merged
+Super+O wired: YES
+Super+X wired: YES
+DONE

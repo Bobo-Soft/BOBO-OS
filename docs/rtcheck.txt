@@ -1,0 +1,13 @@
+wine:            MISSING
+wine64 cmd:      not a separate cmd (unified WoW64)
+wineserver:      /usr/bin/wineserver
+wine 64-bit libs: present
+i386 arch:       i386
+DXVK dir real:   yes (4 x64 dlls)
+DXVK symlink in-chroot: resolves-OK
+waydroid:        1.6.2
+qemu-aarch64:    /usr/bin/qemu-aarch64-static
+flatpak:         Flatpak 1.14.6
+flathub remote:  not configured
+darling wrapper: present
+DONE

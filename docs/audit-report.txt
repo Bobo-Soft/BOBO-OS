@@ -1,0 +1,91 @@
+######## 1. BUILD / ISO ########
+2026-06-12_13:38 /mnt/e/BOBO-OS/build-output/BOBO-OS-v1.0.iso /mnt/e/BOBO-OS/build-output/BOBO-OS-v1.0.iso 2146394112 bytes
+-- iso-tree boot contents --
+4194304 efi.img
+4096 grub
+1108048 initrd.img
+8700928 vmlinuz
+-- squashfs --
+2.0G
+-- grub.cfg present --
+yes
+-- bios.img present --
+yes
+
+######## 2. KERNEL ########
+8700928 bytes /mnt/e/BOBO-OS/build-output/vmlinuz-6.6-bobo
+/mnt/e/BOBO-OS/build-output/iso-tree/boot/vmlinuz
+vmlinuz in iso-tree: yes
+/mnt/e/BOBO-OS/build-output/iso-tree/boot/initrd.img
+initrd in iso-tree: yes
+6.6.87-bobo
+
+######## 3. ROOTFS APT ########
+rootfs size: 7.1G
+universe lines in sources.list: 3
+apt package names: 178522
+installed dpkg packages: 1732
+
+######## 4. DESKTOP ########
+  OK  wayfire
+  OK  wf-panel
+  OK  wf-background
+  OK  weston
+  OK  kitty
+  OK  nemo
+-- autologin tty1 --
+ExecStart=-/sbin/agetty --autologin bobo --noclear %I $TERM
+uid=1000(bobo) gid=1000(bobo) groups=1000(bobo),27(sudo),29(audio),44(video),997(input),994(render),112(libvirt)
+  user bobo: OK
+  wayfire.ini: present
+
+######## 5. NOVALAYER RUNTIMES ########
+  absent     wine
+  absent     wine64
+  absent     darling
+  absent     waydroid
+  absent     qemu-aarch64
+  INSTALLED  qemu-system-aarch64
+  absent     flatpak
+  NovaLayer code present in /usr/local/lib/bobo
+
+######## 6. 32 BOBO APPS ########
+  >>> COMPLETE: 32 / 32
+
+######## 7. BOBOXCODE ########
+  /usr/bin/bobo-xcode: OK
+  /usr/share/bobo-xcode: OK
+  swift: INSTALLED (Swift version 5.10.1 (swift-5.10.1-RELEASE))
+  fastlane: INSTALLED
+  bobo-xcode.desktop: OK
+
+######## 8. WAYFIRE KEYBINDINGS ########
+-- /etc/bobo-wayfire-defaults.ini (command bindings) --
+binding_player   = <super> KEY_V
+command_player   = bobo-player
+binding_monitor  = <ctrl> <shift> KEY_ESC
+command_monitor  = bobo-monitor
+binding_settings = <super> KEY_I
+command_settings = bobo-settings
+binding_search   = <super> KEY_SPACE
+command_search   = bobo-search
+binding_ai       = <super> KEY_A
+command_ai       = bobo-ai-local
+binding_notif    = <super> KEY_N
+command_notif    = bobo-notif --toggle
+binding_ss_full  = KEY_PRINT
+command_ss_full  = bobo-screen --full
+binding_ss_reg   = <shift> KEY_PRINT
+command_ss_reg   = bobo-screen --region
+binding_ss_win   = <alt> KEY_PRINT
+command_ss_win   = bobo-screen --window
+binding_ss_rec   = <ctrl> <alt> KEY_R
+command_ss_rec   = bobo-screen --record
+binding_xcode = <super> KEY_X
+command_xcode = bobo-xcode
+-- Super+X actually in active wayfire.ini? --
+binding_xcode = <super> KEY_X
+command_xcode = bobo-xcode
+  Super+X wired: YES
+
+AUDIT DONE

@@ -41,6 +41,24 @@ if ($env:WSLENV -notlike "*BOBO_XCODE_SKIP_HEAVY*") {
 }
 Write-Host "BoboXcode integration mode: BOBO_XCODE_SKIP_HEAVY=$($env:BOBO_XCODE_SKIP_HEAVY) (1=lean, 0=full Swift/fastlane)" -ForegroundColor Cyan
 
+# --- Bobo Office + BoboAssist (Faza 14) build mode ---
+# Default LEAN (BOBO_OFFICE_SKIP_HEAVY=1): apps + deps baked in; heavy TTS (Coqui)
+# and the Ollama model pull are gated. For everything, run: $env:BOBO_OFFICE_SKIP_HEAVY="0"
+if (-not $env:BOBO_OFFICE_SKIP_HEAVY) { $env:BOBO_OFFICE_SKIP_HEAVY = "1" }
+if ($env:WSLENV -notlike "*BOBO_OFFICE_SKIP_HEAVY*") {
+    if ($env:WSLENV) { $env:WSLENV = $env:WSLENV + ":BOBO_OFFICE_SKIP_HEAVY/u" }
+    else { $env:WSLENV = "BOBO_OFFICE_SKIP_HEAVY/u" }
+}
+Write-Host "Bobo Office integration mode: BOBO_OFFICE_SKIP_HEAVY=$($env:BOBO_OFFICE_SKIP_HEAVY) (1=lean, 0=full TTS/model)" -ForegroundColor Cyan
+
+# --- BoboVoice (Faza 15) build mode ---
+if (-not $env:BOBO_VOICE_SKIP_HEAVY) { $env:BOBO_VOICE_SKIP_HEAVY = "1" }
+if ($env:WSLENV -notlike "*BOBO_VOICE_SKIP_HEAVY*") {
+    if ($env:WSLENV) { $env:WSLENV = $env:WSLENV + ":BOBO_VOICE_SKIP_HEAVY/u" }
+    else { $env:WSLENV = "BOBO_VOICE_SKIP_HEAVY/u" }
+}
+Write-Host "BoboVoice integration mode: BOBO_VOICE_SKIP_HEAVY=$($env:BOBO_VOICE_SKIP_HEAVY) (1=lean, 0=full TTS/LLaVA)" -ForegroundColor Cyan
+
 function Log($msg, $color = "White") {
     $timestamp = Get-Date -Format "HH:mm:ss"
     $line = "[$timestamp] $msg"
@@ -411,6 +429,34 @@ OSR
         echo "BOBO applications integrated."
     fi
 
+    # --- Step 3a: NovaLayer runtimes (full mode only) ---------------------------
+    # Wine+DXVK (Windows), Waydroid (Android), qemu-user-static (iOS ARM),
+    # Flatpak (Linux), Darling informational wrapper (macOS). Gated to full builds
+    # (BOBO_APPS_SKIP_DEPS=0) because Wine+i386+Vulkan pull ~1-2 GB.
+    if [ "${BOBO_APPS_SKIP_DEPS:-1}" = "0" ]; then
+        echo "Step 3a: installing NovaLayer runtimes (Wine/Waydroid/qemu/Flatpak)..."
+        chroot "$ROOTFS" /bin/bash -c '
+            export DEBIAN_FRONTEND=noninteractive
+            dpkg --add-architecture i386
+            apt-get update -qq
+            apt-get install -y --no-install-recommends wine wine64 winetricks libvulkan1 mesa-vulkan-drivers || true
+            apt-get install -y --no-install-recommends wine32:i386 libvulkan1:i386 mesa-vulkan-drivers:i386 || true
+            apt-get install -y --no-install-recommends qemu-user-static binfmt-support flatpak || true
+            apt-get install -y --no-install-recommends waydroid || \
+              { apt-get install -y --no-install-recommends curl ca-certificates >/dev/null 2>&1; \
+                curl -s https://repo.waydro.id/waydroid.gpg -o /usr/share/keyrings/waydroid.gpg 2>/dev/null; \
+                echo "deb [signed-by=/usr/share/keyrings/waydroid.gpg] https://repo.waydro.id/ noble main" > /etc/apt/sources.list.d/waydroid.list; \
+                apt-get update -qq; apt-get install -y --no-install-recommends waydroid || true; }
+            flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo 2>/dev/null || true
+            update-binfmts --enable qemu-aarch64 2>/dev/null || true
+            apt-get clean 2>/dev/null || true
+        ' 2>&1 | tail -25 || echo "WARN: NovaLayer runtimes install non-zero (non-fatal)"
+        # Darling informational wrapper (no apt package; full macOS port is out of scope)
+        printf "#!/bin/bash\necho \"Darling (macOS) in curs de integrare; .app/.dmg intr-o versiune viitoare.\"\nexit 0\n" > "$ROOTFS/usr/bin/darling"
+        chmod +x "$ROOTFS/usr/bin/darling"
+        echo "NovaLayer runtimes integrated."
+    fi
+
     # --- Integrate BoboXcode (isolated Swift/iOS IDE; touches NO existing app) ---
     # Copies the IDE source into the rootfs and runs its self-locating installer
     # in the chroot. Heavy Swift/fastlane/qemu install is gated by
@@ -427,6 +473,59 @@ OSR
         echo "BoboXcode integrated."
     fi
 
+    # --- Step 3c: Bobo Office (9 apps) + BoboAssist -----------------------------
+    # Copies both sources into the rootfs and runs the Office installer in chroot.
+    # Heavy TTS/model pull gated by BOBO_OFFICE_SKIP_HEAVY (default 1 = lean).
+    if [ -d "$BOBO/bobo-office" ]; then
+        echo "Step 3c: integrating Bobo Office + BoboAssist (skip_heavy=${BOBO_OFFICE_SKIP_HEAVY:-1})..."
+        rm -rf "$ROOTFS/tmp/bobo-office-src" "$ROOTFS/tmp/bobo-assist-src"
+        mkdir -p "$ROOTFS/tmp/bobo-office-src" "$ROOTFS/tmp/bobo-assist-src"
+        cp -r "$BOBO/bobo-office/." "$ROOTFS/tmp/bobo-office-src/" 2>/dev/null || true
+        cp -r "$BOBO/bobo-assist/." "$ROOTFS/tmp/bobo-assist-src/" 2>/dev/null || true
+        chroot "$ROOTFS" /bin/bash -c \
+            "export BOBO_OFFICE_SKIP_HEAVY=${BOBO_OFFICE_SKIP_HEAVY:-1}; cd /tmp/bobo-office-src && bash install.sh" \
+            2>&1 | tail -40 || echo "WARN: Bobo Office installer returned non-zero (non-fatal)"
+        rm -rf "$ROOTFS/tmp/bobo-office-src" "$ROOTFS/tmp/bobo-assist-src" 2>/dev/null || true
+        echo "Bobo Office integrated."
+    fi
+
+    # --- Step 3d: BoboVoice (offline voice assistant) --------------------------
+    # Heavy TTS (Coqui) + LLaVA pull gated by BOBO_VOICE_SKIP_HEAVY (default lean).
+    if [ -d "$BOBO/bobo-voice" ]; then
+        echo "Step 3d: integrating BoboVoice (skip_heavy=${BOBO_VOICE_SKIP_HEAVY:-1})..."
+        rm -rf "$ROOTFS/tmp/bobo-voice-src"; mkdir -p "$ROOTFS/tmp/bobo-voice-src"
+        cp -r "$BOBO/bobo-voice/." "$ROOTFS/tmp/bobo-voice-src/" 2>/dev/null || true
+        chroot "$ROOTFS" /bin/bash -c \
+            "export BOBO_VOICE_SKIP_HEAVY=${BOBO_VOICE_SKIP_HEAVY:-1}; cd /tmp/bobo-voice-src && bash install.sh" \
+            2>&1 | tail -30 || echo "WARN: BoboVoice installer returned non-zero (non-fatal)"
+        rm -rf "$ROOTFS/tmp/bobo-voice-src" 2>/dev/null || true
+        echo "BoboVoice integrated."
+    fi
+
+    # --- Step 3e: BOBO Shell (Windows-like desktop: taskbar/start/sidebar/desktop/CAD) ---
+    # GTK3 + gtk-layer-shell. Replaces the top wf-panel with a bottom auto-hide taskbar,
+    # adds desktop icons, Start menu, right action center, Ctrl+Alt+Del screen, personalization.
+    if [ -d "$BOBO/bobo-shell" ]; then
+        echo "Step 3e: integrating BOBO Shell (Windows-like UI)..."
+        rm -rf "$ROOTFS/tmp/bobo-shell-src"; mkdir -p "$ROOTFS/tmp/bobo-shell-src"
+        cp -r "$BOBO/bobo-shell/." "$ROOTFS/tmp/bobo-shell-src/" 2>/dev/null || true
+        chroot "$ROOTFS" /bin/bash -c "cd /tmp/bobo-shell-src && bash install.sh" \
+            2>&1 | tail -30 || echo "WARN: BOBO Shell installer returned non-zero (non-fatal)"
+        rm -rf "$ROOTFS/tmp/bobo-shell-src" 2>/dev/null || true
+        echo "BOBO Shell integrated."
+    fi
+
+    # --- Step 3f: BOBO Browser (native WebKit2GTK browser, DuckDuckGo default) ---
+    if [ -d "$BOBO/bobo-browser" ]; then
+        echo "Step 3f: integrating BOBO Browser..."
+        rm -rf "$ROOTFS/tmp/bobo-browser-src"; mkdir -p "$ROOTFS/tmp/bobo-browser-src"
+        cp -r "$BOBO/bobo-browser/." "$ROOTFS/tmp/bobo-browser-src/" 2>/dev/null || true
+        chroot "$ROOTFS" /bin/bash -c "cd /tmp/bobo-browser-src && bash install.sh" \
+            2>&1 | tail -25 || echo "WARN: BOBO Browser installer returned non-zero (non-fatal)"
+        rm -rf "$ROOTFS/tmp/bobo-browser-src" 2>/dev/null || true
+        echo "BOBO Browser integrated."
+    fi
+
     # --- Wire bobo-apps + BoboXcode keybindings into the ACTIVE wayfire.ini ---
     # Wayfire has NO include directive, so the bindings in /etc/bobo-wayfire-defaults.ini
     # are inert unless merged into the bobo user's ~/.config/wayfire.ini [command] section.
@@ -437,6 +536,54 @@ OSR
         awk '/^\[command\]/{print; while((getline l < "/tmp/bobo-binds.txt")>0) print l; close("/tmp/bobo-binds.txt"); next} {print}' "$WF_USER" > "$WF_USER.new" && mv "$WF_USER.new" "$WF_USER"
         chroot "$ROOTFS" chown bobo:bobo /home/bobo/.config/wayfire.ini 2>/dev/null || true
         echo "Wayfire keybindings (Super+X etc.) merged into bobo user's wayfire.ini."
+    fi
+
+    # --- Faza 17 FIX 1: GTK4 renderer + NovaLayer BOBO_ROOT (universal / VM compatibility) ---
+    # GSK_RENDERER=cairo: GTK4 apps must render via software when GL is broken (e.g. vmwgfx in
+    # VirtualBox), else they die with "Error 71 (Protocol error) dispatching to Wayland display".
+    # BOBO_ROOT: makes NovaLayer's wine/darling/ios wrapper paths resolve (files live under core/).
+    ENVF="$ROOTFS/etc/environment"
+    grep -q '^GSK_RENDERER=' "$ENVF" 2>/dev/null || echo 'GSK_RENDERER=cairo'                >> "$ENVF"
+    grep -q '^BOBO_ROOT='    "$ENVF" 2>/dev/null || echo 'BOBO_ROOT=/usr/local/lib/bobo/core' >> "$ENVF"
+
+    # --- Faza 17 FIX 3: register .exe/.msi/.dmg/.ipa/.apk double-click -> NovaLayer ---
+    if [ -f "$ROOTFS/usr/local/lib/bobo/core/novalayer/novalayer-daemon.py" ]; then
+        cat > "$ROOTFS/usr/local/bin/bobo-run-file" <<'PYEOF'
+#!/usr/bin/env python3
+"""NovaLayer file opener for the file manager. Routes a foreign binary to its runtime."""
+import sys, os, subprocess, importlib.util
+os.environ.setdefault("BOBO_ROOT", "/usr/local/lib/bobo/core")
+if len(sys.argv) < 2 or not os.path.isfile(sys.argv[1]):
+    sys.exit(2)
+f = sys.argv[1]; ext = os.path.splitext(f)[1].lower()
+try:
+    spec = importlib.util.spec_from_file_location("nld", "/usr/local/lib/bobo/core/novalayer/novalayer-daemon.py")
+    m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m); m.open_file(f); sys.exit(0)
+except Exception:
+    pass
+if ext in (".exe", ".bat", ".cmd"): subprocess.Popen(["wine", f]); sys.exit(0)
+if ext == ".msi": subprocess.Popen(["wine", "msiexec", "/i", f]); sys.exit(0)
+subprocess.Popen(["xdg-open", f])
+PYEOF
+        chmod 0755 "$ROOTFS/usr/local/bin/bobo-run-file"
+        cat > "$ROOTFS/usr/share/applications/bobo-novalayer-open.desktop" <<'DEOF'
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=Run with NovaLayer
+Comment=Run Windows/macOS/mobile apps (Wine, Darling, iOS, Waydroid)
+Exec=/usr/local/bin/bobo-run-file %f
+Icon=bobo-installer
+Terminal=false
+NoDisplay=true
+MimeType=application/x-ms-dos-executable;application/x-msdownload;application/vnd.microsoft.portable-executable;application/x-msi;application/x-apple-diskimage;application/x-xar;application/vnd.android.package-archive;
+DEOF
+        MAPPS="$ROOTFS/usr/share/applications/mimeapps.list"
+        if [ ! -f "$MAPPS" ] || ! grep -q 'x-ms-dos-executable' "$MAPPS" 2>/dev/null; then
+            printf '[Default Applications]\napplication/x-ms-dos-executable=bobo-novalayer-open.desktop\napplication/x-msdownload=bobo-novalayer-open.desktop\napplication/vnd.microsoft.portable-executable=bobo-novalayer-open.desktop\napplication/x-msi=bobo-novalayer-open.desktop\napplication/x-apple-diskimage=bobo-novalayer-open.desktop\napplication/vnd.android.package-archive=bobo-novalayer-open.desktop\n' >> "$MAPPS"
+        fi
+        chroot "$ROOTFS" update-desktop-database /usr/share/applications 2>/dev/null || true
+        echo "NovaLayer .exe/.msi double-click handler registered."
     fi
 
     # Unmount chroot binds so they are NOT captured into the squashfs
@@ -558,9 +705,17 @@ msg "live media on $FOUND"
 if ! mount -t squashfs -o ro /cdrom/live/filesystem.squashfs /lower 2>/dev/null; then
   msg "squashfs mount failed -> rescue shell"; exec /bin/busybox sh
 fi
+# Optional "fixes" layer: a small squashfs shipped next to the main one whose files
+# take precedence (overlayfs leftmost lowerdir wins). Lets us patch a few files into
+# a big already-built rootfs without repacking the whole 11 GB tree.
+LOWER=/lower
+mkdir -p /fixes
+if [ -f /cdrom/live/fixes.squashfs ] && mount -t squashfs -o ro /cdrom/live/fixes.squashfs /fixes 2>/dev/null; then
+  msg "fixes layer mounted (takes precedence)"; LOWER=/fixes:/lower
+fi
 mount -t tmpfs tmpfs /upper
 mkdir -p /upper/up /upper/work
-if ! mount -t overlay overlay -o lowerdir=/lower,upperdir=/upper/up,workdir=/upper/work /newroot 2>/dev/null; then
+if ! mount -t overlay overlay -o lowerdir=$LOWER,upperdir=/upper/up,workdir=/upper/work /newroot 2>/dev/null; then
   msg "overlay failed -> binding squashfs read-only"; mount --bind /lower /newroot
 fi
 for fs in proc sys dev run; do mkdir -p /newroot/$fs; mount --move /$fs /newroot/$fs 2>/dev/null; done
@@ -703,18 +858,39 @@ if command -v mmd &>/dev/null; then
 fi
 
 # Create squashfs from the NATIVE rootfs (the live filesystem)
-if [ -s "$ISO_TREE/live/filesystem.squashfs" ]; then
-    echo "squashfs already exists ($(du -sh $ISO_TREE/live/filesystem.squashfs | cut -f1)) -- skipping."
+# FIX 6 + FIX 9: build squashfs on NATIVE ext4 (/root), THEN copy to the DrvFs ISO tree.
+# Writing the ~2 GB compressed output DIRECTLY to /mnt/e (NTFS via the DrvFs 9P bridge)
+# balloons the WSL2 VM memory with dirty relay buffers and drops the vmmem connection
+# mid-run (Wsl/Service/0x80072746) on a 11 GB desktop rootfs. Compressing to native ext4
+# removes that write pressure entirely; the final transfer to E: is one sequential copy.
+NATIVE_SQUASH="/root/filesystem.squashfs"
+# Reuse ONLY a squashfs with a valid superblock -- a crashed run can leave a truncated file
+# that passes -s but is unbootable.
+if [ -s "$ISO_TREE/live/filesystem.squashfs" ] && unsquashfs -s "$ISO_TREE/live/filesystem.squashfs" >/dev/null 2>&1; then
+    echo "squashfs already exists and VALID ($(du -sh $ISO_TREE/live/filesystem.squashfs | cut -f1)) -- skipping."
 else
-    echo "Creating squashfs (compressed rootfs -- this takes 2-10 minutes)..."
-    # FIX 6: cap mksquashfs memory (-mem) and parallelism (-processors). Without a cap,
-    # mksquashfs balloons RAM on large (2 GB+) desktop rootfs trees and WEDGES the WSL2
-    # distro (it stops responding to any command). 512 MB / 2 procs is stable.
-    # Exclude virtual filesystems so live /proc, /sys, /dev are not captured.
-    mksquashfs "$ROOTFS" "$ISO_TREE/live/filesystem.squashfs" \
+    [ -s "$ISO_TREE/live/filesystem.squashfs" ] && { echo "existing squashfs INVALID/truncated -- rebuilding."; rm -f "$ISO_TREE/live/filesystem.squashfs"; }
+    echo "Creating squashfs on NATIVE ext4 (minimal footprint -- this takes 15-30 minutes)..."
+    # Tame writeback + cache growth. Over a long pack of a large (10 GB+ / 200k-file) tree the
+    # page cache + dentry/inode cache + dirty buffers accumulate until the WSL2 host is starved
+    # and the utility VM HARD-CRASHES (reboots mid-run, exit 253, no OOM logged). Force early
+    # writeback + aggressive inode reclaim, pack single-threaded with throttled I/O, and flush
+    # reclaimable caches every 20s via a background housekeeper so vmmem never balloons.
+    sysctl -w vm.dirty_background_ratio=2 vm.dirty_ratio=5 vm.vfs_cache_pressure=200 >/dev/null 2>&1 || true
+    sync; echo 3 > /proc/sys/vm/drop_caches 2>/dev/null || true
+    rm -f "$NATIVE_SQUASH"
+    ( while true; do sleep 20; sync; echo 3 > /proc/sys/vm/drop_caches 2>/dev/null || break; done ) &
+    HK=$!
+    ionice -c3 nice -n19 mksquashfs "$ROOTFS" "$NATIVE_SQUASH" \
         -comp gzip -b 131072 -noappend -no-xattrs \
-        -mem 512M -processors 2 \
-        -e proc -e sys -e dev -e run -e tmp -e var/cache/apt/archives -e boot 2>&1 | tail -5
+        -mem 256M -processors 1 \
+        -e proc -e sys -e dev -e run -e tmp -e var/cache/apt/archives -e boot 2>&1 | tail -6
+    kill "$HK" 2>/dev/null || true
+    echo "Native squashfs done ($(du -sh $NATIVE_SQUASH | cut -f1)). Copying to ISO tree on E:..."
+    # Single sequential copy across DrvFs (no live compression buffering).
+    cp -f "$NATIVE_SQUASH" "$ISO_TREE/live/filesystem.squashfs"
+    sync
+    echo "Copied to ISO tree ($(du -sh $ISO_TREE/live/filesystem.squashfs | cut -f1))."
 fi
 
 echo "ISO tree size: $(du -sh $ISO_TREE | cut -f1)"

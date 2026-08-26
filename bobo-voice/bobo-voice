@@ -1,0 +1,6 @@
+#!/bin/bash
+# BoboVoice launcher (prefers the voice venv: system gi + audio/ASR libs)
+if [ "$1" = "--version" ]; then echo "BoboVoice 1.0.0 (BOBO OS)"; exit 0; fi
+PY=/usr/share/bobo-voice/venv/bin/python3
+[ -x "$PY" ] || PY=python3
+exec "$PY" /usr/share/bobo-voice/bobo_voice.py "$@"

@@ -1,0 +1,10 @@
+#!/usr/bin/env python3
+"""BoboAssist launcher (installed to /usr/bin/bobo-assist). Prefers the isolated venv."""
+import sys, os
+VENV = "/usr/share/bobo-assist/venv/bin/python3"
+MAIN = "/usr/share/bobo-assist/assist.py"
+if "--version" in sys.argv:
+    print("BoboAssist 1.0.0 (BOBO OS)"); sys.exit(0)
+if os.path.exists(VENV) and os.path.realpath(sys.executable) != os.path.realpath(VENV):
+    os.execv(VENV, [VENV, MAIN] + sys.argv[1:])
+os.execv(sys.executable, [sys.executable, MAIN] + sys.argv[1:])

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=BoboVoice
+Comment=Asistent vocal offline „Hey Bobo" pentru BOBO OS
+Exec=bobo-voice
+Icon=bobo-voice
+Terminal=false
+Type=Application
+Categories=BOBO;Utility;Accessibility;
+StartupNotify=true
+StartupWMClass=bobo-voice

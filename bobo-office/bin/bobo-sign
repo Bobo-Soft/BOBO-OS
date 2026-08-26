@@ -1,0 +1,4 @@
+#!/bin/bash
+PY=/usr/share/bobo-office/venv/bin/python3
+[ -x "$PY" ] || PY=python3
+exec "$PY" /usr/share/bobo-office/sign/sign.py "$@"

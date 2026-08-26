@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BOBO Browser — New tab</title>
+<style>
+  :root { --bg:#1a1a2e; --accent:#4a9eff; --fg:#ffffff; --panel:#232342; }
+  * { box-sizing:border-box; }
+  html,body { height:100%; margin:0; }
+  body {
+    background:
+      radial-gradient(1200px 600px at 50% -10%, #26264a 0%, var(--bg) 60%);
+    color:var(--fg);
+    font-family:"Inter","Segoe UI",system-ui,sans-serif;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:28px; padding:24px;
+  }
+  .logo { display:flex; align-items:center; gap:14px; }
+  .logo .mark {
+    width:56px; height:56px; border-radius:14px;
+    background:linear-gradient(135deg, var(--accent), #7bc0ff);
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:28px; color:#0d1030;
+    box-shadow:0 8px 30px rgba(74,158,255,.35);
+  }
+  .logo .name { font-size:34px; font-weight:800; letter-spacing:.5px; }
+  .logo .name span { color:var(--accent); }
+  form.search { width:min(620px, 92vw); position:relative; }
+  form.search input {
+    width:100%; padding:16px 52px 16px 20px; font-size:17px;
+    color:var(--fg); background:var(--panel);
+    border:1px solid #33335a; border-radius:28px; outline:none;
+  }
+  form.search input:focus { border-color:var(--accent); box-shadow:0 0 0 3px rgba(74,158,255,.25); }
+  form.search button {
+    position:absolute; right:8px; top:8px; bottom:8px; width:44px;
+    border:none; border-radius:20px; background:var(--accent); color:#fff;
+    font-size:18px; cursor:pointer;
+  }
+  .privacy { font-size:13px; opacity:.75; }
+  .privacy b { color:var(--accent); }
+  .tiles { display:flex; flex-wrap:wrap; gap:14px; justify-content:center; max-width:680px; }
+  .tile {
+    width:104px; height:92px; border-radius:14px; background:var(--panel);
+    border:1px solid #2c2c52; text-decoration:none; color:var(--fg);
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px;
+    transition:.15s;
+  }
+  .tile:hover { border-color:var(--accent); transform:translateY(-2px); }
+  .tile .ic { font-size:26px; }
+  .tile .lb { font-size:12px; opacity:.9; }
+  footer { position:fixed; bottom:16px; font-size:12px; opacity:.5; }
+</style>
+</head>
+<body>
+  <div class="logo">
+    <div class="mark">B</div>
+    <div class="name">BOBO<span> Browser</span></div>
+  </div>
+
+  <form class="search" action="https://duckduckgo.com/" method="GET">
+    <input name="q" autofocus autocomplete="off" placeholder="Search the web privately with DuckDuckGo…">
+    <input type="hidden" name="t" value="bobo">
+    <input type="hidden" name="kp" value="1">
+    <button type="submit" aria-label="Search">&#128269;</button>
+  </form>
+  <div class="privacy">🔒 Private search by <b>DuckDuckGo</b> — no tracking, no profiling.</div>
+
+  <div class="tiles">
+    <a class="tile" href="https://duckduckgo.com/"><div class="ic">🦆</div><div class="lb">DuckDuckGo</div></a>
+    <a class="tile" href="https://en.wikipedia.org/"><div class="ic">📚</div><div class="lb">Wikipedia</div></a>
+    <a class="tile" href="https://github.com/Bobo-Soft/BOBO-OS"><div class="ic">🐙</div><div class="lb">BOBO OS</div></a>
+    <a class="tile" href="https://www.openstreetmap.org/"><div class="ic">🗺️</div><div class="lb">Maps</div></a>
+    <a class="tile" href="https://news.ycombinator.com/"><div class="ic">📰</div><div class="lb">News</div></a>
+    <a class="tile" href="https://www.protonmail.com/"><div class="ic">✉️</div><div class="lb">Mail</div></a>
+  </div>
+
+  <footer>BOBO Browser · tabs suspend after 5 min idle to save memory</footer>
+</body>
+</html>
