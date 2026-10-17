@@ -17,7 +17,8 @@ boot/kernel/vmlinuz*
 
 # --- SEPARATE PRODUCTS (NOT part of BOBO OS — keep in their own repos) ------
 # These are PRIVATE products with their own repos; this repo is PUBLIC, so they
-# must never be committed here. (Extended 2026-07-18 by git-sweep.)
+# must never be committed here. (Extended 2026-07-18 by git-sweep; atlas-biblic 2026-10-17.)
+atlas-biblic/
 bobo-ai/
 bobostudio/
 BoboStudio/
